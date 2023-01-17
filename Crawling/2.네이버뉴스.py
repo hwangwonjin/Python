@@ -7,8 +7,10 @@ import requests as req
 from bs4 import BeautifulSoup as bs
 from openpyxl import Workbook
 
+# 액셀 파일 생성
 workbook = Workbook()
 sheet = workbook.active
+
 sheet['A1'] = '파이썬 뉴스 크롤링'
 pg = 1
 count = 1
@@ -16,7 +18,7 @@ count = 1
 
 while True:
     # HTML 요청
-    url = 'https://news.naver.com/main/list.naver?mode=LS2D&sid2=230&sid1=105&mid=shm&date=20230116&page=%d' % pg
+    url = 'https://news.naver.com/main/list.naver?mode=LS2D&sid2=230&sid1=105&mid=shm&page=%d' % pg
     html=req.get(url, headers={'User-Agent': 'Mozilla/5.0'}).text
     #print(html)
 
@@ -47,6 +49,8 @@ while True:
 
     pg +=1
 
+#엑셀 저장/종료
 workbook.save('C:/Users/java2/Desktop/News.xlsx')
 workbook.close
+
 print('프로그램 종료....')
